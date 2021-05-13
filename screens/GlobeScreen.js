@@ -3,35 +3,22 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 // import { ZoomableMap, Marker } from 'react-native-simple-maps';
 // import * as SVG from 'react-native-svg';
 // import WorldMap from 'react-native-world-map-svg';
-//import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 const GlobeScreen = props => {
+
     return (
-        // <SVG height='100%' width='100%'>
-        //     <SVG.Ellipse />
-        // </SVG>
-        // <View style={styles.container}>
-        // <MapView style={styles.map}
-        //     provider={PROVIDER_GOOGLE}
-        //     initialRegion={{
-        //         latitude: 37.78825,
-        //         longitude: -122.4324,
-        //         latitudeDelta: 0.0922,
-        //         longitudeDelta: 0.0421
-        //     }}
-        // />
-        // </View>
-        <View>
-            <Text>
-                33
-            </Text>
+        <View style={styles.container}>
+        <MapView style={styles.map}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421
+            }}
+        />
         </View>
     )
-}
-
-GlobeScreen.navigationOptions = navData => {
-    return {
-        headerShown: false
-    }
 }
 
 const styles = StyleSheet.create({

@@ -4,9 +4,6 @@ class Country{
         this.iso = iso;
         this.flag = flag;
     }
-    upperToLower = () => {
-        return this.iso.toLowerCase();
-    }
 }
 
 export default Country;

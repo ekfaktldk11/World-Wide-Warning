@@ -16,12 +16,6 @@ const BookMarkScreen = props => {
     )
 }
 
-BookMarkScreen.navigationOptions = navData => {
-    return {
-        headerShown: false
-    }
-}
-
 const styles = StyleSheet.create({
 
 });

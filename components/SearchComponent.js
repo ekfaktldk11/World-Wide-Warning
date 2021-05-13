@@ -3,30 +3,28 @@ import { View, FlatList, StyleSheet, Text, ActivityIndicator, Image } from 'reac
 import { SearchBar } from 'react-native-elements';
 import { Nations } from '../data/dummy-data';
 
+import TouchableTab from './TouchableTab';
+
 const SearchComponent = props => {
     console.log('reRendered');
     const [query, setQuery] = useState('');
-    //const [isLoading, setIsLoading] = useState(true);
     const [showEnable, setShowEnable] = useState(false);
     const [filteredNationList, setFilteredNationList] = useState([]);
     useEffect(() => {
         setFilteredNationList(Nations.slice());
     }, [])
 
-    console.log('filteredNationList');
-    console.log(filteredNationList);
-    //const [nationList, setNationList] = useState([]);
+    // console.log('filteredNationList');
+    // console.log(filteredNationList);
 
-    //const [filteredNation, setFilteredNation] = useState(Country);
-    //console.log(nationList);
     const showEnableHandler = () => {
-        //console.log('ShowEnableHandler Run...');
+
         props.setRenderDisable();
         setShowEnable(true);
     }
 
     const showDisableHandler = () => {
-        //console.log('ShowDisableHandler Run...');
+
         props.setRenderEnable();
         setShowEnable(false);
     }
@@ -50,51 +48,34 @@ const SearchComponent = props => {
         }
     }
 
+    // const pressItemHandler = (item) => {
+    //     console.log('pressed');
+    //     props.navigation.navigate('Info', {
+    //         flagPath: item.flag,
+    //         nation: item.nation,
+    //         iso: item.iso
+    //     });
+    //     // props.navigation.navigate({
+    //     //      routeName: 'Info', params : {
+    //     //          flagPath : item.flag,
+    //     //          nation : item.nation,
+    //     //          iso : item.iso
+    //     //      }
+    //     //  })
+    // }
+
     const renderFilteredItem = (itemData) => {
         if (!query) return;
         console.log(itemData);
         const country = itemData.item;
-        //console.log(`Ele of List : ${country}`);
-        // console.log(country);
-        // let search = query;
-        // let filteredNation;
-        // const filePathToData = '../data';
-        // if (country.item.nation.startsWith(search, 0)) {
-        //     filteredNation = country.item;
-        //     //console.log(nationList.length);
-        //     //console.log(country);
-        // } else {
-        //     nationList.splice(nationList.indexOf(country), 1);
-        //     return
-        // }
+
         return (
-            <View style={styles.filteredInfo}>
-                {/* <Image source={require(
-                    filePathToData + filteredNation.flag)}
-                /> */}
-                <Text>{country.nation}</Text>
-                <Text>{country.iso}</Text>
-            </View>
+            <TouchableTab
+                selectedNation={country}
+                onSelect={() => props.navigateToInfo(country)}
+            />
         )
     }
-
-    // useEffect(() => {
-    //     renderFilteredItem;
-    //     showDisableHandler;
-    //     showEnableHandler;
-    //     updateQuery;
-    // },[])
-
-
-    // const filterNames = (country) => {
-    //     let search = query;
-    //     if (country.nation.startsWith(search, 0)) {
-    //         return country;
-    //     } else {
-    //         Nations.splice(Nations.indexOf(country), 1);
-    //         return null;
-    //     }
-    // }
 
     return (
         <View style={styles.screen}>
@@ -103,10 +84,9 @@ const SearchComponent = props => {
                 value={query}
                 placeholder="나라 검색"
                 onFocus={showEnableHandler}
-                onBlur={showDisableHandler}
+            //onBlur={showDisableHandler}
             />
             {showEnable && <FlatList
-                //ListHeaderComponent={isLoading && <ActivityIndicator />}
                 data={filteredNationList}
                 keyExtractor={(item) => item.iso}
                 renderItem={renderFilteredItem}
@@ -115,11 +95,11 @@ const SearchComponent = props => {
     )
 }
 
-// SearchScreen.navigationOptions = navData => {
-//     return {
-//         headerShown : false
-//     }
-// }
+SearchComponent.navigationOptions = navData => {
+    return {
+
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {
@@ -129,11 +109,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 2,
         paddingVertical: 5
     },
-    filteredInfo: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    }
+    // filteredInfo: {
+    //     flex: 1,
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-around'
+    // }
 });
 
 export default SearchComponent;

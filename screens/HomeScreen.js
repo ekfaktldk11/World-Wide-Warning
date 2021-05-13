@@ -1,10 +1,10 @@
-import React,{useState} from 'react';
-import {View,Text,StyleSheet, Button} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import SearchComponent from '../components/SearchComponent';
 
 const HomeScreen = props => {
     const [renderEnable, setRenderEnable] = useState(true);
-    
+
     const renderEnableHandler = () => {
         setRenderEnable(true);
     }
@@ -13,28 +13,33 @@ const HomeScreen = props => {
         setRenderEnable(false);
     }
 
-    return(
+    const navigateToInfoHandler = ( nationInfo ) => {
+        console.log('pressed');
+        props.navigation.navigate('Info', {
+            flag: nationInfo.flag,
+            nation: nationInfo.nation,
+            iso: nationInfo.iso
+        })
+    }
+
+
+    return (
         <View>
             {renderEnable && <Text>
                 HomeScreen
             </Text>}
-            <SearchComponent 
+            <SearchComponent
+                navigateToInfo={navigateToInfoHandler}
                 setRenderEnable={renderEnableHandler}
                 setRenderDisable={renderDisableHandler}
             />
             {renderEnable && <Button
-            title='go to Globe'
-            onPress={() => 
-            props.navigation.navigate('Globe')}
+                title='go to Globe'
+                onPress={() =>
+                    props.navigation.navigate('Globe')}
             />}
         </View>
     )
-}
-
-HomeScreen.navigationOptions = navData => {
-    return {
-        headerShown: false
-    }
 }
 
 const styles = StyleSheet.create({
