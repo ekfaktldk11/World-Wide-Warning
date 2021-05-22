@@ -4,7 +4,15 @@ import CovidScreen from './CovidScreen';
 import EntryScreen from './EntryScreen';
 import SafeInfoScreen from './SafeInfoScreen';
 import CategoryCard from '../components/CategoryCard';
-import { fetchEntry, fetchSafety } from '../temp/fetchData';
+import {
+    fetchEntry,
+    fetchSafety,
+    fetchWeeklyConfirmed,
+    fetchWeeklyRecoverd,
+    fetchWeeklyDeceased,
+    fetchDailyTotal,
+    fetchRegionalByCountry
+} from '../temp/fetchData';
 
 
 const CategoryScreen = props => {
@@ -12,24 +20,63 @@ const CategoryScreen = props => {
     const [entryResult, setEntryResult] = useState([]);
     const [safetyResult, setSafetyResult] = useState([]);
     const [pageNum, setPageNum] = useState(1);
+    const [weeklyConfirmed, setWeeklyConfirmed] = useState(null);
+    const [weeklyRecoverd, setWeeklyRecoverd] = useState(null);
+    const [weeklyDeceased, setWeeklyDeceased] = useState(null);
+    const [dailyReport, setDailyReport] = useState();
 
     const { route } = props;
 
     const nation = route.params.nation;
     const iso = route.params.iso;
 
-    
 
     useEffect(() => {
         fetchEntry(nation, iso)
             .then((result) => setEntryResult(result));
+        fetchWeeklyConfirmed(iso)
+            .then((response) => response.json()).then((json) => {
+                setWeeklyConfirmed(json.data)
+                // let weeklyConfirmed = Object.keys(json.data).map((key) => [key, json.data[key]])
+                console.log(weeklyConfirmed);
+            }).catch((err) => {
+                console.log(err);
+            });
+        fetchWeeklyRecoverd(iso)
+            .then((response) => response.json()).then((json) => {
+                setWeeklyRecoverd(json.data)
+                console.log(weeklyRecoverd);
+            }).catch((err) => {
+                console.log(err);
+            });
+        fetchWeeklyDeceased(iso)
+            .then((response) => response.json()).then((json) => {
+                setWeeklyDeceased(json.data)
+                console.log(weeklyDeceased);
+            }).catch((err) => {
+                console.log(err);
+            });
+        fetchDailyTotal(iso)
+            .then((response) => response.json()).then((json) => {
+                setDailyReport(json.data.Stats);
+                console.log(dailyReport);
+            }).catch((err) => {
+                console.log(err);
+            });
+        fetchRegionalByCountry(iso)
+            .then((response) => response.json()).then((json) => {
+                let regionalReport = json.data
+                //console.log(regionalReport);
+            }).catch((err) => {
+                console.log(err);
+            });
         //await 가 들어간 함수의 결과는 promise 를 return
     }, []);
 
     useEffect(() => {
         fetchSafety(nation, iso, pageNum)
             .then((result) => setSafetyResult(result));
-    },[pageNum]);
+    }, [pageNum]);
 
     const setPageNumUp = () => {
         setPageNum(pageNum + 1)
@@ -46,7 +93,7 @@ const CategoryScreen = props => {
     }
 
     const showCoronaDshBrd = () => {
-        props.navigation.navigate('CBoard',{
+        props.navigation.navigate('CBoard', {
             iso: iso.toLowerCase()
         })
     }
@@ -60,8 +107,12 @@ const CategoryScreen = props => {
     switch (screenNum) {
         case 1:
             content = <CovidScreen
-                iso={iso.toLowerCase()}
-                showCoronaDshBrd={showCoronaDshBrd}
+                weeklyConfirmed={weeklyConfirmed}
+                weeklyRecoverd={weeklyRecoverd}
+                weeklyDeceased={weeklyDeceased}
+                dailyReport={dailyReport}
+                // iso={iso.toLowerCase()}
+                // showCoronaDshBrd={showCoronaDshBrd}
                 screenConvert={screenConvertHandler} />
             break
         case 2:
@@ -73,7 +124,7 @@ const CategoryScreen = props => {
         case 3:
             content = <SafeInfoScreen
                 nation={nation}
-                safetyResult = {safetyResult}
+                safetyResult={safetyResult}
                 showDetailHandler={showDetailHandler}
                 screenConvert={screenConvertHandler}
                 pageNum={pageNum}
