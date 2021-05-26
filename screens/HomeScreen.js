@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, StyleSheet, Button } from 'react-native';
 import SearchComponent from '../components/SearchComponent';
 
 const HomeScreen = props => {
     const [renderEnable, setRenderEnable] = useState(true);
 
+    console.log(renderEnable);
     const renderEnableHandler = () => {
         setRenderEnable(true);
     }
@@ -13,7 +14,7 @@ const HomeScreen = props => {
         setRenderEnable(false);
     }
 
-    const navigateToInfoHandler = ( nationInfo ) => {
+    const navigateToInfoHandler = (nationInfo) => {
         console.log('pressed');
         props.navigation.navigate('Info', {
             flag: nationInfo.flag,
@@ -24,26 +25,33 @@ const HomeScreen = props => {
 
 
     return (
-        <View>
-            {renderEnable && <Text>
-                HomeScreen
-            </Text>}
-            <SearchComponent
-                navigateToInfo={navigateToInfoHandler}
-                setRenderEnable={renderEnableHandler}
-                setRenderDisable={renderDisableHandler}
-            />
-            {renderEnable && <Button
+        <TouchableWithoutFeedback onPress={renderEnableHandler}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+                {renderEnable && <View style={{marginTop: 50}}>
+                    <Image style={styles.imageSize} source={require('../data/backGround.png')} />
+                </View>}
+                <SearchComponent
+                    navigateToInfo={navigateToInfoHandler}
+                    setRenderEnable={renderEnableHandler}
+                    setRenderDisable={renderDisableHandler}
+                    renderHomeImage={renderEnable}
+                />
+                {/* {renderEnable && <Button
                 title='go to Globe'
                 onPress={() =>
                     props.navigation.navigate('Globe')}
-            />}
-        </View>
+            />} */}
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
 const styles = StyleSheet.create({
-
+    imageSize: {
+        width: 300,
+        height: 300,
+        resizeMode: 'stretch'
+    }
 });
 
 export default HomeScreen;

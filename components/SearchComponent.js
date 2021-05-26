@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, StyleSheet, Text, ActivityIndicator, Image } from 'react-native';
+import { View, FlatList, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Nations } from '../data/dummy-data';
+import { Icon } from 'native-base';
 
 import TouchableTab from './TouchableTab';
 
 const SearchComponent = props => {
     console.log('reRendered');
     const [query, setQuery] = useState('');
-    const [showEnable, setShowEnable] = useState(false);
     const [filteredNationList, setFilteredNationList] = useState([]);
     useEffect(() => {
         setFilteredNationList(Nations.slice());
@@ -18,15 +18,8 @@ const SearchComponent = props => {
     // console.log(filteredNationList);
 
     const showEnableHandler = () => {
-
+        console.log("call showEnableHandler")
         props.setRenderDisable();
-        setShowEnable(true);
-    }
-
-    const showDisableHandler = () => {
-
-        props.setRenderEnable();
-        setShowEnable(false);
     }
 
     const updateQuery = (text) => {
@@ -48,22 +41,6 @@ const SearchComponent = props => {
         }
     }
 
-    // const pressItemHandler = (item) => {
-    //     console.log('pressed');
-    //     props.navigation.navigate('Info', {
-    //         flagPath: item.flag,
-    //         nation: item.nation,
-    //         iso: item.iso
-    //     });
-    //     // props.navigation.navigate({
-    //     //      routeName: 'Info', params : {
-    //     //          flagPath : item.flag,
-    //     //          nation : item.nation,
-    //     //          iso : item.iso
-    //     //      }
-    //     //  })
-    // }
-
     const renderFilteredItem = (itemData) => {
         if (!query) return;
         console.log(itemData);
@@ -78,37 +55,53 @@ const SearchComponent = props => {
     }
 
     return (
-        <View style={styles.screen}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.screen}
+            
+        >
             <SearchBar
+                onPressIn={showEnableHandler}
+                round
+                backgroundColor={'white'}
+                clearIcon={{ size: 24 }}
+                //rightIconContainerStyle={styles.searchBar}
+                //leftIconContainerStyle={styles.searchBar}
+                inputStyle={styles.searchBar}
+                inputContainerStyle={styles.searchBar}
+                containerStyle={{ ...styles.searchBar, ...{ borderWidth: 1, borderRadius: 5 } }}
+                searchIcon={{ size: 24 }}
                 onChangeText={updateQuery}
                 value={query}
                 placeholder="나라 검색"
-                onFocus={showEnableHandler}
-            //onBlur={showDisableHandler}
             />
-            {showEnable && <FlatList
+            {!props.renderHomeImage && <View style={styles.listContainer}><FlatList
+                contentContainerStyle
                 data={filteredNationList}
                 keyExtractor={(item) => item.iso}
                 renderItem={renderFilteredItem}
-            />}
-        </View>
+            /></View>}
+        </KeyboardAvoidingView>
     )
-}
-
-SearchComponent.navigationOptions = navData => {
-    return {
-
-    }
 }
 
 const styles = StyleSheet.create({
     screen: {
         width: '100%',
+        justifyContent: 'center',
+        marginVertical: 10,
+        paddingHorizontal: 5
+    },
+    searchBar: {
+        backgroundColor: 'white'
     },
     input: {
         paddingHorizontal: 2,
         paddingVertical: 5
     },
+    listContainer: {
+        // alignContent: 'center'
+    }
     // filteredInfo: {
     //     flex: 1,
     //     flexDirection: 'row',

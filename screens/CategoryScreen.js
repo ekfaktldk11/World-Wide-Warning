@@ -13,7 +13,7 @@ import {
     fetchDailyTotal,
     fetchRegionalByCountry
 } from '../temp/fetchData';
-
+import colors from '../constants/colors'
 
 const CategoryScreen = props => {
     const [screenNum, setScreenNum] = useState(0);
@@ -132,18 +132,21 @@ const CategoryScreen = props => {
                 setPageNumDown={setPageNumDown} />
             break
         default:
-            content = <><CategoryCard
+            content = <View style={{flex: 1, backgroundColor: colors.accent}}><View style={{height: '5%'}}></View><CategoryCard
                 onSelect={() => screenConvertHandler(1)}
+                image={require('../data/corona.png')}
                 title="감염병 정보"
             />
                 <CategoryCard
                     onSelect={() => screenConvertHandler(2)}
+                    image={require('../data/entry.png')}
                     title="입국 허가 요건"
                 />
                 <CategoryCard
                     onSelect={() => screenConvertHandler(3)}
+                    image={require('../data/info.png')}
                     title="안전 정보"
-                /></>
+                /></View>
             break
     }
 

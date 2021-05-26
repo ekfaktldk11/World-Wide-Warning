@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback, Text, StyleSheet } from 'react-native';
+import { View, TouchableNativeFeedback, Image, Text, StyleSheet } from 'react-native';
 
 const CategoryCard = props => {
     return (
@@ -8,6 +8,7 @@ const CategoryCard = props => {
                 onPress={props.onSelect}
             >
                 <View style={styles.touchableTab}>
+                    <Image style={styles.imageContainer} source={props.image} />
                     <Text style={styles.fontStyle}>{props.title}</Text>
                 </View>
             </TouchableNativeFeedback>
@@ -17,23 +18,34 @@ const CategoryCard = props => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        height: '25%',
+        height: '27%',
         width: '90%',
         margin: 5,
         elevation: 3,
         flexDirection: 'column',
         alignSelf: 'center',
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1
+        borderColor: '#f6cfd0',
+        borderWidth: 5,
+        borderRadius: 10,
+        backgroundColor: 'white'
     },
     touchableTab: {
         flex: 1,
-        justifyContent: 'center'
+        flexDirection: 'row',
+        alignItems:'center',
+        justifyContent: 'flex-start'
     },
     fontStyle: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    imageContainer: {
+        width: 80,
+        height: 80,
+        resizeMode: 'stretch',
+        marginLeft: 20,
+        marginRight: 50
     }
 })
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableNativeFeedback, Text, Image, StyleSheet } from 'react-native';
+import colors from '../constants/colors';
 
 const TouchableTab = props => {
 
@@ -13,6 +14,7 @@ const TouchableTab = props => {
                 <View style={styles.touchableTab}>
                     <Image style={styles.flag} source={selectedNation.flag} />
                     <Text style={styles.list}>{selectedNation.nation}</Text>
+                    <Text style={styles.iso}>{selectedNation.iso}</Text>
                 </View>
             </TouchableNativeFeedback>
         </View>
@@ -21,25 +23,38 @@ const TouchableTab = props => {
 
 const styles = StyleSheet.create({
     container: {
-        margin: 1,
         height: 40,
-        width: '90%',
-        elevation: 3
+        width: '95%',
+        borderWidth: 1,
+        borderRadius: 5,
+        margin: 5,
+        elevation: 3,
+        alignSelf: 'center',
+        backgroundColor: colors.primary
     },
     touchableTab: {
+        paddingTop : 3,
+        paddingHorizontal: 5,
         flexDirection: 'row',
-        alignItems : 'center'
+        justifyContent: 'center',
+        alignContent : 'center'
     },
     flag: {
         flex: 1,
-        width: 70,
-        height: 40,
+        width: 60,
+        height: 30,
         resizeMode: 'stretch'
     },
     list: {
         flex: 4,
         fontSize: 20,
         textAlign: 'center'
+    },
+    iso: {
+        flex: 1,
+        fontSize: 18,
+        textAlign: 'center',
+        color: '#a7afab'
     }
 });
 
