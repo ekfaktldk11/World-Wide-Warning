@@ -11,7 +11,8 @@ import {
     fetchWeeklyRecoverd,
     fetchWeeklyDeceased,
     fetchDailyTotal,
-    fetchRegionalByCountry
+    fetchEntryPolicy,
+    entryDataProcess
 } from '../temp/fetchData';
 import colors from '../constants/colors'
 
@@ -19,6 +20,7 @@ const CategoryScreen = props => {
     const [screenNum, setScreenNum] = useState(0);
     const [entryResult, setEntryResult] = useState([]);
     const [safetyResult, setSafetyResult] = useState([]);
+    const [processedDataList, setProcessedDataList] = useState([]);
     const [pageNum, setPageNum] = useState(1);
     const [weeklyConfirmed, setWeeklyConfirmed] = useState(null);
     const [weeklyRecoverd, setWeeklyRecoverd] = useState(null);
@@ -30,6 +32,14 @@ const CategoryScreen = props => {
     const nation = route.params.nation;
     const iso = route.params.iso;
 
+    useEffect(() => {
+      fetchEntryPolicy().then((result => {
+        let data = entryDataProcess(result);
+        setProcessedDataList(data);
+      })).catch((err) => {
+          console.log(err);
+      });
+    },[]);
 
     useEffect(() => {
         fetchEntry(nation, iso)
@@ -37,39 +47,33 @@ const CategoryScreen = props => {
         fetchWeeklyConfirmed(iso)
             .then((response) => response.json()).then((json) => {
                 setWeeklyConfirmed(json.data)
-                // let weeklyConfirmed = Object.keys(json.data).map((key) => [key, json.data[key]])
-                console.log(weeklyConfirmed);
             }).catch((err) => {
                 console.log(err);
             });
         fetchWeeklyRecoverd(iso)
             .then((response) => response.json()).then((json) => {
                 setWeeklyRecoverd(json.data)
-                console.log(weeklyRecoverd);
             }).catch((err) => {
                 console.log(err);
             });
         fetchWeeklyDeceased(iso)
             .then((response) => response.json()).then((json) => {
                 setWeeklyDeceased(json.data)
-                console.log(weeklyDeceased);
             }).catch((err) => {
                 console.log(err);
             });
         fetchDailyTotal(iso)
             .then((response) => response.json()).then((json) => {
                 setDailyReport(json.data.Stats);
-                console.log(dailyReport);
             }).catch((err) => {
                 console.log(err);
             });
-        fetchRegionalByCountry(iso)
-            .then((response) => response.json()).then((json) => {
-                let regionalReport = json.data
-                //console.log(regionalReport);
-            }).catch((err) => {
-                console.log(err);
-            });
+        // fetchRegionalByCountry(iso)
+        //     .then((response) => response.json()).then((json) => {
+        //         let regionalReport = json.data
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     });
         //await 가 들어간 함수의 결과는 promise 를 return
     }, []);
 
@@ -119,6 +123,8 @@ const CategoryScreen = props => {
             content = <EntryScreen
                 nation={nation}
                 entryResult={entryResult}
+                entryPolicy={processedDataList}
+                showDetailHandler={showDetailHandler}
                 screenConvert={screenConvertHandler} />
             break
         case 3:

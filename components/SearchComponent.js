@@ -7,15 +7,11 @@ import { Icon } from 'native-base';
 import TouchableTab from './TouchableTab';
 
 const SearchComponent = props => {
-    console.log('reRendered');
     const [query, setQuery] = useState('');
     const [filteredNationList, setFilteredNationList] = useState([]);
     useEffect(() => {
         setFilteredNationList(Nations.slice());
     }, [])
-
-    // console.log('filteredNationList');
-    // console.log(filteredNationList);
 
     const showEnableHandler = () => {
         console.log("call showEnableHandler")
@@ -26,7 +22,6 @@ const SearchComponent = props => {
         console.log(text);
         if (text) {
             let nationList = Nations.filter(function (item) {
-                console.log('item?');
                 console.log(item);
                 console.log(item.nation.startsWith(text, 0));
                 return item.nation.startsWith(text, 0) === true;
@@ -76,7 +71,6 @@ const SearchComponent = props => {
                 placeholder="나라 검색"
             />
             {!props.renderHomeImage && <View style={styles.listContainer}><FlatList
-                contentContainerStyle
                 data={filteredNationList}
                 keyExtractor={(item) => item.iso}
                 renderItem={renderFilteredItem}

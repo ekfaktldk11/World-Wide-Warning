@@ -1,12 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator, ScrollView, Text, LogBox, StyleSheet, Linking, Button, processColor } from 'react-native';
-import { BarChart } from 'react-native-charts-wrapper';
+import GraphCard from '../components/GraphCard';
+import CustomButton from '../components/CustomButton';
+import ReportCard from '../components/ReportCard';
+import colors from '../constants/colors';
+// import YouTubeList from '../components/YoutubeList';
+// import { fetchYoutubeData } from '../temp/fetchData';
 
 const CovidScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
+  // const [videoItems, setVideoItems] = useState([]);
 
   LogBox.ignoreLogs(['Warning: Failed prop type'])
   console.log(isLoading);
+
+//   useEffect(() => {
+//     console.log("useEffect called");
+//     fetchYoutubeData(`${nation} 코로나`)
+//         .then((result) => result.json())
+//         .then((json) => setVideoItems(json.items))
+//         .catch((err) => console.log(err))
+// }, [])
 
   const {
     weeklyConfirmed,
@@ -32,9 +46,9 @@ const CovidScreen = props => {
         dataSets: [{
           values: dataList,
           config: {
-            color: processColor('#e8b99d'),
+            color: processColor(colors.primary),
             highlightAlpha: 255,
-            highlightColor: processColor('#C95109'),
+            highlightColor: processColor(colors.accent),
           },
         }],
         config: {
@@ -102,95 +116,32 @@ const CovidScreen = props => {
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={styles.cardContainer}>
-        <View style={styles.card}>
-          <Text style={{fontWeight: 'bold'}}>확진자</Text>
-          <Text>{dailyReport[2] == "0" ? 'no data' : dailyReport[2]}</Text>
-        </View>
-        <View style={styles.card}>
-          <Text style={{fontWeight: 'bold'}}>완치자</Text>
-          <Text>{dailyReport[3] == "0" ? 'no data' : dailyReport[3]}</Text>
-        </View>
-        <View style={styles.card}>
-          <Text style={{fontWeight: 'bold'}}>사망자</Text>
-          <Text>{dailyReport[4] == "0" ? 'no data' : dailyReport[4]}</Text>
-        </View>
+        <ReportCard dailyReport={dailyReport[2]}>
+          확진자
+        </ReportCard>
+        <ReportCard dailyReport={dailyReport[3]}>
+          완치자
+        </ReportCard>
+        <ReportCard dailyReport={dailyReport[4]}>
+          사망자
+        </ReportCard>
       </View>
-      <View style={styles.graphTitleBox}>
-        <Text style={styles.graphTitle}>주간 확진자</Text>
-      </View>
-      <BarChart style={{ height: 200, marginBottom: 10 }}
-        data={confirmedData.barChartData}
-        xAxis={confirmedData.xAxis}
-        yAxis={confirmedData.yAxis}
-        animation={{
-          durationY: 1000,
-          easingY: 'EaseOutQuad',
-        }}
-        gridBackgroundColor={processColor('#ffffff')}
-        drawHighlightArrow
-        drawBarShadow={false}
-        highlights={confirmedData.highlights}
-        drawBorders={false}
-        legend={confirmedData.legend}
-        noDataText="no data available"
-        chartDescription={confirmedData.description}
-        drawValueAboveBar
-        scaleEnabled={false}
-        dragEnabled={false}
-        pinchZoom={false}
-        doubleTapToZoomEnabled={false}
+      <GraphCard
+        reportedData={confirmedData}
+        reportedType={'주간 확진자'}
       />
-      <View style={styles.graphTitleBox}>
-        <Text style={styles.graphTitle}>주간 완치자</Text>
-      </View>
-      <BarChart style={{ height: 200, marginBottom: 10 }}
-        data={recoverdData.barChartData}
-        xAxis={recoverdData.xAxis}
-        yAxis={recoverdData.yAxis}
-        animation={{
-          durationY: 1000,
-          easingY: 'EaseOutQuad',
-        }}
-        gridBackgroundColor={processColor('#ffffff')}
-        drawHighlightArrow
-        drawBarShadow={false}
-        highlights={recoverdData.highlights}
-        drawBorders={false}
-        legend={recoverdData.legend}
-        noDataText="no data available"
-        chartDescription={recoverdData.description}
-        drawValueAboveBar
-        scaleEnabled={false}
-        dragEnabled={false}
-        pinchZoom={false}
-        doubleTapToZoomEnabled={false}
+      <GraphCard
+        reportedData={recoverdData}
+        reportedType={'주간 완치자'}
       />
-      <View style={styles.graphTitleBox}>
-        <Text style={styles.graphTitle}>주간 사망자</Text>
-      </View>
-      <BarChart style={{ height: 200, marginBottom: 10 }}
-        data={deceasedData.barChartData}
-        xAxis={deceasedData.xAxis}
-        yAxis={deceasedData.yAxis}
-        animation={{
-          durationY: 1000,
-          easingY: 'EaseOutQuad',
-        }}
-        gridBackgroundColor={processColor('#ffffff')}
-        drawHighlightArrow
-        drawBarShadow={false}
-        highlights={deceasedData.highlights}
-        drawBorders={false}
-        legend={deceasedData.legend}
-        noDataText="no data available"
-        chartDescription={deceasedData.description}
-        drawValueAboveBar
-        scaleEnabled={false}
-        dragEnabled={false}
-        pinchZoom={false}
-        doubleTapToZoomEnabled={false}
+      <GraphCard
+        reportedData={deceasedData}
+        reportedType={'주간 사망자'}
       />
-      <Button title='Back' onPress={() => props.screenConvert(0)} />
+      {/* <YouTubeList videoItems={videoItems}/> */}
+      <CustomButton onSelect={() => props.screenConvert(0)}>
+        뒤로 가기
+      </CustomButton>
     </ScrollView>
   )
 }
@@ -198,22 +149,8 @@ const CovidScreen = props => {
 const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     height: 60
-  },
-  card: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  graphTitleBox: {
-    flexDirection: 'row',
-    height: 35,
-    alignItems: 'center',
-    paddingTop: 5
-  },
-  graphTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontWeight: 'bold'
   },
   indicator: {
     flex: 1,

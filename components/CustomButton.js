@@ -1,14 +1,15 @@
 import React from 'react';
 import {View, Text, TouchableNativeFeedback, StyleSheet} from 'react-native';
+import colors from '../constants/colors';
 
-const NextButton = props => {
+const CustomButton = props => {
     return(
         <View style={styles.container}>
             <TouchableNativeFeedback
                 onPress={props.onSelect}
             >
                 <View style={styles.touchableTab}>
-                    <Text>
+                    <Text style={styles.text}>
                         {props.children}
                     </Text>
                 </View>
@@ -20,21 +21,22 @@ const NextButton = props => {
 const styles = StyleSheet.create({
     container:{
         margin: 5,
-        height: 25,
-        width: 60,
-        elevation: 3,
-        borderWidth: 0.5,
-        borderColor: 'gray',
-        alignSelf: 'center'
+        height: 40,
+        width: 70,
+        borderWidth: 3,
+        borderRadius: 5,
+        borderColor: colors.accent,
+        justifyContent: 'center'
     },
     touchableTab:{
-        padding: 2,
+        flex: 1,
         justifyContent: 'center'
     },
     text:{
+        fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 15
     }
 })
 
-export default NextButton;
+export default CustomButton;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
-import NextButton from '../components/NextButton';
-import TouchableInfoDetail from '../components/TouchableInfoDetail'
+import CustomButton from '../components/CustomButton';
+import SafeInfoCard from '../components/SafeInfoCard';
+import colors from '../constants/colors';
 
 const SafeInfoScreen = props => {
     //const [reRenderList, setReRenderList] = useState(false);
@@ -26,54 +27,58 @@ const SafeInfoScreen = props => {
         let itemData = itemInfo.item;
 
         return (
-            <View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ flex: 1 }}>
-                        {itemData.wrt_dt}
-                    </Text>
-                    <Text style={{ flex: 4 }}>
-                        {itemData.title}
-                    </Text>
-                    <TouchableInfoDetail
-                        onFocusDetail={() => props.showDetailHandler(itemData.txt_origin_cn)}
-                    />
-                </View>
-            </View>
+            <SafeInfoCard
+                wrt_dt={itemData.wrt_dt}
+                title={itemData.title}
+                txt_origin_cn={itemData.txt_origin_cn}
+                showDetailHandler={props.showDetailHandler}
+            />
         )
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <Text>
-                {nation}의 안전 정보
-            </Text>
-            {!safetyResult && <Text>
-                결과 없음
+        <View style={styles.container}>
+            {!safetyResult && <Text style={{
+                textAlign: 'center',
+                color: 'red',
+                fontWeight: 'bold',
+                fontSize: 24
+            }}>
+                {nation}의 안전 정보가 존재하지 않습니다.
             </Text>}
             {safetyResult && <FlatList
                 data={safetyResult}
                 keyExtractor={(item) => item.sfty_notice_id}
                 renderItem={renderLoadedData}
             />}
-            <View style={{ flexDirection: 'row' }}>
-                {checkTailRenderEnable(pageNum) && <NextButton
-                    onSelect={props.setPageNumDown}
-                >
-                    이전
-            </NextButton>}
-                {checkHeadRenderEnable(safetyResult) && <NextButton
-                    onSelect={props.setPageNumUp}
-                >
-                    다음
-            </NextButton>}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row'}}>
+                    {checkTailRenderEnable(pageNum) && <CustomButton
+                        onSelect={props.setPageNumDown}
+                    >
+                        이 전
+            </CustomButton>}
+                    {checkHeadRenderEnable(safetyResult) && <CustomButton
+                        onSelect={props.setPageNumUp}
+                    >
+                        다 음
+            </CustomButton>}
+                </View>
+                <View>
+                    <CustomButton onSelect={() => props.screenConvert(0)}
+                    >
+                        뒤로 가기
+            </CustomButton>
+                </View>
             </View>
-            <Button title='Back' onPress={() => props.screenConvert(0)} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1
+    }
 });
 
 export default SafeInfoScreen;

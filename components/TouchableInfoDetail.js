@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text, Button, TouchableNativeFeedback, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import colors from '../constants/colors';
 
 const TouchableInfoDetail = props => {
 
@@ -8,9 +10,7 @@ const TouchableInfoDetail = props => {
             <TouchableNativeFeedback
                 onPress={props.onFocusDetail}
             >
-                <Text style={styles.text}>
-                    자세히..
-                </Text>
+                <Icon name="arrow-forward-outline" size={25} color={colors.accent} />
             </TouchableNativeFeedback>
         </View>
     )
@@ -18,14 +18,9 @@ const TouchableInfoDetail = props => {
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        flex:2,
         marginLeft: 3,
-        borderLeftColor: 'gray',
-        borderLeftWidth: 3
-    },
-    text:{
-        fontSize : 12,
-        textAlign: 'center'
+        alignItems: 'center'
     }
 })
 

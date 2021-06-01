@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import SysNavigator from './navigation/SysNavigator'
+import SysNavigator from './navigation/SysNavigator';
 
 export default function App() {
   return (
