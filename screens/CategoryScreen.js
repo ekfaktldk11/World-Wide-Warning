@@ -141,7 +141,7 @@ const CategoryScreen = props => {
             content = <View style={{flex: 1, backgroundColor: colors.accent}}><View style={{height: '5%'}}></View><CategoryCard
                 onSelect={() => screenConvertHandler(1)}
                 image={require('../data/corona.png')}
-                title="감염병 정보"
+                title="코로나 현황"
             />
                 <CategoryCard
                     onSelect={() => screenConvertHandler(2)}
