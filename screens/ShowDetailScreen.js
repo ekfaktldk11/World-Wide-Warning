@@ -13,7 +13,6 @@ const ShowDetailScreen = props => {
             <HTML ignoredStyles={['line-height']}
             contentWidth={contentWidth} source={{html : detailInfo}}/>
         </ScrollView>
-        // ScrollView 문제가 아닌 html content 의 styling 문제
     )
 }
 
