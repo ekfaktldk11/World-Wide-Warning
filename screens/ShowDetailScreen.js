@@ -13,7 +13,6 @@ const ShowDetailScreen = props => {
             <HTML ignoredStyles={['line-height']}
             contentWidth={contentWidth} source={{html : detailInfo}}/>
         </ScrollView>
-        //
     )
 }
 
