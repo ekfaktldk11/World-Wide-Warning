@@ -13,23 +13,23 @@ In order to make this possible, we develop an application that shows correspondi
 # To build the App
 1. 앱 빌드를 위해 설치해야할 목록
 
-(1) Node.js
+        (1) Node.js
 
-(2) npm
+        (2) npm
 
-(3) python (not for Mac OS)
+        (3) python (not for Mac OS)
 
-(4) React-Native-Cli
+        (4) React-Native-Cli
 
 2. 모듈 설치는 아래를 참조해 주세요.
 
-https://nodejs.org/ko/ - Node.js 
+        https://nodejs.org/ko/ - Node.js 
 
-https://www.npmjs.com/ - npm 
+        https://www.npmjs.com/ - npm 
 
-https://www.python.org/downloads/ - python 
+        https://www.python.org/downloads/ - python 
 
-https://mohitaunni.medium.com/react-native-cli-explained-for-beginners-4725a271c30d - React Native
+        https://mohitaunni.medium.com/react-native-cli-explained-for-beginners-4725a271c30d - React Native
 
 3. 공공데이터 포탈, Rapid API를 호출하기 위한 key를 발급 받으시고 key가 들어가야할 위치에 key값을 넣어주세요. (check 'fetchData.js' in 'temp' folder)
 
