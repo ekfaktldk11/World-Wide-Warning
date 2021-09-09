@@ -6,7 +6,7 @@ import Key from '../constants/key';
 export const fetchEntry = async (nation, iso) => {
     const loadedData = [];
     let dataExist = false;
-    let baseUrl = `http://apis.data.go.kr/1262000/EntranceVisaService2/getEntranceVisaList2?serviceKey=ZrxWpXYf4fPdKrPobaESDZz44r%2FSfwySh%2F0h185OMrbrxgOPSoYXPiTtQBw1f8ZDPSUzUwPqnU8RIdLygbnrMQ%3D%3D&pageNo=1&numOfRows=10&cond[country_nm::EQ]=${nation}&cond[country_iso_alp2::EQ]=${iso}`;
+    let baseUrl = `http://apis.data.go.kr/1262000/EntranceVisaService2/getEntranceVisaList2?serviceKey=[Your_Key]&pageNo=1&numOfRows=10&cond[country_nm::EQ]=${nation}&cond[country_iso_alp2::EQ]=${iso}`;
 
     const response = await fetch(baseUrl, {});
 
@@ -15,7 +15,6 @@ export const fetchEntry = async (nation, iso) => {
     };
 
     const resData = await response.json();
-    //console.log(resData);
 
     if (resData.currentCount > 0) {
         dataExist = true;
@@ -44,7 +43,7 @@ export const fetchEntry = async (nation, iso) => {
 export const fetchSafety = async (nation, iso, pgNum) => {
     const loadedData = [];
     let dataExist = false;
-    let baseUrl = `http://apis.data.go.kr/1262000/CountrySafetyService2/getCountrySafetyList2?serviceKey=ZrxWpXYf4fPdKrPobaESDZz44r%2FSfwySh%2F0h185OMrbrxgOPSoYXPiTtQBw1f8ZDPSUzUwPqnU8RIdLygbnrMQ%3D%3D&pageNo=${String(pgNum)}&numOfRows=10&cond[country_nm::EQ]=${nation}&cond[country_iso_alp2::EQ]=${iso}`;
+    let baseUrl = `http://apis.data.go.kr/1262000/CountrySafetyService2/getCountrySafetyList2?serviceKey=[Your_Key]&pageNo=${String(pgNum)}&numOfRows=10&cond[country_nm::EQ]=${nation}&cond[country_iso_alp2::EQ]=${iso}`;
 
     const response = await fetch(baseUrl, {});
 
@@ -77,7 +76,7 @@ export const fetchWeeklyConfirmed = async (iso) => {
         method: 'GET',
         headers: {
             "x-authorization": "6179002e-6646-4852-be37-572758a58cbb",
-            "x-rapidapi-key": "27b47f90bamsh0076c9c039efb2ep1ea28fjsn79937e73c16d",
+            "x-rapidapi-key": "[Your_Key]",
             "x-rapidapi-host": "covid-19-global-tracker-with-regional-data.p.rapidapi.com",
             "useQueryString": true
         }
@@ -92,7 +91,7 @@ export const fetchWeeklyRecoverd = async (iso) => {
         method: 'GET',
         headers: {
             "x-authorization": "6179002e-6646-4852-be37-572758a58cbb",
-            "x-rapidapi-key": "27b47f90bamsh0076c9c039efb2ep1ea28fjsn79937e73c16d",
+            "x-rapidapi-key": "[Your_Key]",
             "x-rapidapi-host": "covid-19-global-tracker-with-regional-data.p.rapidapi.com",
             "useQueryString": true
         }
@@ -107,7 +106,7 @@ export const fetchWeeklyDeceased = async (iso) => {
         method: 'GET',
         headers: {
             "x-authorization": "6179002e-6646-4852-be37-572758a58cbb",
-            "x-rapidapi-key": "27b47f90bamsh0076c9c039efb2ep1ea28fjsn79937e73c16d",
+            "x-rapidapi-key": "[Your_Key]",
             "x-rapidapi-host": "covid-19-global-tracker-with-regional-data.p.rapidapi.com",
             "useQueryString": true
         }
@@ -122,7 +121,7 @@ export const fetchDailyTotal = async (iso) => {
         method: 'GET',
         headers: {
             "x-authorization": "6179002e-6646-4852-be37-572758a58cbb",
-            "x-rapidapi-key": "27b47f90bamsh0076c9c039efb2ep1ea28fjsn79937e73c16d",
+            "x-rapidapi-key": "[Your_Key]",
             "x-rapidapi-host": "covid-19-global-tracker-with-regional-data.p.rapidapi.com",
             "useQueryString": true
         }
@@ -132,7 +131,7 @@ export const fetchDailyTotal = async (iso) => {
 
 export const fetchEntryPolicy = async () => {
     let DOMParser = require('xmldom').DOMParser;
-    let baseUrl = `http://apis.data.go.kr/1262000/SafetyNewsList/getCountrySafetyNewsList?serviceKey=ZrxWpXYf4fPdKrPobaESDZz44r%2FSfwySh%2F0h185OMrbrxgOPSoYXPiTtQBw1f8ZDPSUzUwPqnU8RIdLygbnrMQ%3D%3D&numOfRows=100&pageNo=1&title1=%EC%9E%85%EA%B5%AD`;
+    let baseUrl = `http://apis.data.go.kr/1262000/SafetyNewsList/getCountrySafetyNewsList?serviceKey=[Your_Key]&pageNo=1&title1=%EC%9E%85%EA%B5%AD`;
 
     const response = await fetch(baseUrl, {});
 
