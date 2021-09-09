@@ -12,6 +12,7 @@ In order to make this possible, we develop an application that shows correspondi
 
 # To build the App
 1. 앱 빌드를 위해 설치해야할 목록
+
 (1) Node.js
 
 (2) npm
