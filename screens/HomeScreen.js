@@ -36,11 +36,6 @@ const HomeScreen = props => {
                     setRenderDisable={renderDisableHandler}
                     renderHomeImage={renderEnable}
                 />
-                {/* {renderEnable && <Button
-                title='go to Globe'
-                onPress={() =>
-                    props.navigation.navigate('Globe')}
-            />} */}
             </View>
         </TouchableWithoutFeedback>
     )

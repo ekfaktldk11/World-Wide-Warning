@@ -4,23 +4,12 @@ import GraphCard from '../components/GraphCard';
 import CustomButton from '../components/CustomButton';
 import ReportCard from '../components/ReportCard';
 import colors from '../constants/colors';
-// import YouTubeList from '../components/YoutubeList';
-// import { fetchYoutubeData } from '../temp/fetchData';
 
 const CovidScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
-  // const [videoItems, setVideoItems] = useState([]);
 
   LogBox.ignoreLogs(['Warning: Failed prop type'])
   console.log(isLoading);
-
-//   useEffect(() => {
-//     console.log("useEffect called");
-//     fetchYoutubeData(`${nation} 코로나`)
-//         .then((result) => result.json())
-//         .then((json) => setVideoItems(json.items))
-//         .catch((err) => console.log(err))
-// }, [])
 
   const {
     weeklyConfirmed,
@@ -96,8 +85,6 @@ const CovidScreen = props => {
   }
   console.log(confirmedData);
 
-  //let base = `https://covid19.who.int/region/amro/country/${iso}`
-
   if (isLoading) {
     setTimeout(function () {
       dataLoading(weeklyConfirmed,
@@ -138,7 +125,6 @@ const CovidScreen = props => {
         reportedData={deceasedData}
         reportedType={'주간 사망자'}
       />
-      {/* <YouTubeList videoItems={videoItems}/> */}
       <CustomButton onSelect={() => props.screenConvert(0)}>
         뒤로 가기
       </CustomButton>

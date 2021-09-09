@@ -1,8 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-// import { ZoomableMap, Marker } from 'react-native-simple-maps';
-// import * as SVG from 'react-native-svg';
-// import WorldMap from 'react-native-world-map-svg';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 const GlobeScreen = props => {
 

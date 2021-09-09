@@ -68,13 +68,6 @@ const CategoryScreen = props => {
             }).catch((err) => {
                 console.log(err);
             });
-        // fetchRegionalByCountry(iso)
-        //     .then((response) => response.json()).then((json) => {
-        //         let regionalReport = json.data
-        //     }).catch((err) => {
-        //         console.log(err);
-        //     });
-        //await 가 들어간 함수의 결과는 promise 를 return
     }, []);
 
     useEffect(() => {
@@ -115,8 +108,6 @@ const CategoryScreen = props => {
                 weeklyRecoverd={weeklyRecoverd}
                 weeklyDeceased={weeklyDeceased}
                 dailyReport={dailyReport}
-                // iso={iso.toLowerCase()}
-                // showCoronaDshBrd={showCoronaDshBrd}
                 screenConvert={screenConvertHandler} />
             break
         case 2:

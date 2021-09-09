@@ -5,7 +5,7 @@ import SafeInfoCard from '../components/SafeInfoCard';
 import colors from '../constants/colors';
 
 const SafeInfoScreen = props => {
-    //const [reRenderList, setReRenderList] = useState(false);
+    
     const {
         safetyResult,
         nation,

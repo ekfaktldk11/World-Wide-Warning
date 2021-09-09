@@ -3,8 +3,6 @@ import { ScrollView, View, Text, StyleSheet, FlatList, Button } from 'react-nati
 import CustomButton from '../components/CustomButton';
 import EntryCard from '../components/EntryCard';
 import SafeInfoCard from '../components/SafeInfoCard';
-// import YouTubeList from '../components/YoutubeList';
-// import { fetchYoutubeData } from '../temp/fetchData';
 
 const EntryScreen = props => {
     const { nation, entryResult, entryPolicy } = props;
@@ -14,16 +12,6 @@ const EntryScreen = props => {
     let policyList = entryPolicy.filter(function (item) {
         return item.countryName == nation
     })
-
-    // useEffect(() => {
-    //     console.log("useEffect called");
-    //     fetchYoutubeData(`${nation} 입국 제한`)
-    //         .then((result) => result.json())
-    //         .then((json) => setVideoItems(json.items))
-    //         .catch((err) => console.log(err))
-    // }, [])
-    // console.log('videoItems');
-    // console.log(videoItems);
 
     const doNeedPspt = (pspt) => {
         if (pspt == 'Y') return true;
@@ -64,10 +52,6 @@ const EntryScreen = props => {
                     renderItem={renderPolicyItem}
                 />}
             </View>
-
-            {/* {videoItems.length > 0 && <YouTubeList
-                        videoItems={videoItems}
-                    />} */}
             <CustomButton onSelect={() => props.screenConvert(0)}>
                 뒤로 가기
             </CustomButton>
