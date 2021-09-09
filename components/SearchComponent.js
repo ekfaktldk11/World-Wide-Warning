@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, FlatList, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { Nations } from '../data/dummy-data';
-import { Icon } from 'native-base';
-
 import TouchableTab from './TouchableTab';
 
 const SearchComponent = props => {
@@ -60,8 +58,6 @@ const SearchComponent = props => {
                 round
                 backgroundColor={'white'}
                 clearIcon={{ size: 24 }}
-                //rightIconContainerStyle={styles.searchBar}
-                //leftIconContainerStyle={styles.searchBar}
                 inputStyle={styles.searchBar}
                 inputContainerStyle={styles.searchBar}
                 containerStyle={{ ...styles.searchBar, ...{ borderWidth: 1, borderRadius: 5 } }}
@@ -70,7 +66,7 @@ const SearchComponent = props => {
                 value={query}
                 placeholder="나라 검색"
             />
-            {!props.renderHomeImage && <View style={styles.listContainer}><FlatList
+            {!props.renderHomeImage && <View><FlatList
                 data={filteredNationList}
                 keyExtractor={(item) => item.iso}
                 renderItem={renderFilteredItem}
@@ -92,15 +88,7 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal: 2,
         paddingVertical: 5
-    },
-    listContainer: {
-        // alignContent: 'center'
     }
-    // filteredInfo: {
-    //     flex: 1,
-    //     flexDirection: 'row',
-    //     justifyContent: 'space-around'
-    // }
 });
 
 export default SearchComponent;

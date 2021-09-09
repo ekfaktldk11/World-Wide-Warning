@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import MainTab from './navGroups/MainTab';
 import HomeScreen from '../screens/HomeScreen';
 import GlobeScreen from '../screens/GlobeScreen';
 import CategoryScreen from '../screens/CategoryScreen';

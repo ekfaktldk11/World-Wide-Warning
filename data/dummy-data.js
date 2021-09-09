@@ -218,7 +218,3 @@ export const Nations = [
     new Country('세르비아','RS',require('../data/national_flag/RS.gif')),
     new Country('남수단','SS',require('../data/national_flag/SS.gif')),
 ]
-
-// export let EntryList = [
-
-// ]
