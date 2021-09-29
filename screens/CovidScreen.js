@@ -7,9 +7,7 @@ import colors from '../constants/colors';
 
 const CovidScreen = props => {
   const [isLoading, setIsLoading] = useState(true);
-
   LogBox.ignoreLogs(['Warning: Failed prop type'])
-  console.log(isLoading);
 
   const {
     weeklyConfirmed,
@@ -17,7 +15,6 @@ const CovidScreen = props => {
     weeklyDeceased,
     dailyReport
   } = props;
-  console.log(dailyReport);
 
   const dataLoading = (a, b, c) => {
     if (a == null || b == null || c == null) return;
@@ -83,7 +80,7 @@ const CovidScreen = props => {
     recoverdData = weeklyDataProcess(weeklyRecoverd);
     deceasedData = weeklyDataProcess(weeklyDeceased);
   }
-  console.log(confirmedData);
+
 
   if (isLoading) {
     setTimeout(function () {

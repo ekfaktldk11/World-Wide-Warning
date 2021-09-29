@@ -11,8 +11,6 @@ const SafeInfoScreen = props => {
         nation,
         pageNum } = props;
 
-    console.log(safetyResult);
-
     const checkTailRenderEnable = (n) => {
         if (n == 1) return false;
         else return true;

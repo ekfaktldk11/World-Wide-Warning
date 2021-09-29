@@ -15,7 +15,6 @@ const HomeScreen = props => {
     }
 
     const navigateToInfoHandler = (nationInfo) => {
-        console.log('pressed');
         props.navigation.navigate('Info', {
             flag: nationInfo.flag,
             nation: nationInfo.nation,

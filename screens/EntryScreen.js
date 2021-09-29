@@ -7,8 +7,6 @@ import SafeInfoCard from '../components/SafeInfoCard';
 const EntryScreen = props => {
     const { nation, entryResult, entryPolicy } = props;
 
-    const [videoItems, setVideoItems] = useState([]);
-
     let policyList = entryPolicy.filter(function (item) {
         return item.countryName == nation
     })

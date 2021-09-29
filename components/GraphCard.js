@@ -6,7 +6,6 @@ import {BarChart} from 'react-native-charts-wrapper';
 const GraphCard = props => {
 
     const { reportedData, reportedType } = props
-    console.log(reportedData);
 
     return (
         <View style={styles.cardContainer}>
