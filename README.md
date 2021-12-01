@@ -35,6 +35,9 @@ In order to make this possible, we develop an application that shows correspondi
 
 4. 위 내용이 만족된다면 다운받은 프로젝트 폴더에서 'react-native run-android' 명령어로 프로젝트 실행이 가능합니다.
 
+# Problem Solving
+https://docs.google.com/document/d/1s2-XLu-SZS90u1GwJwggcogjhnx9iB-g/edit?usp=sharing&ouid=114752426086930564634&rtpof=true&sd=true
+
 # Project Pamphlet
 https://drive.google.com/file/d/1kKFzQjP_JFQrQrgWi5mimTPd84vrN9bc/view?usp=sharing
 
